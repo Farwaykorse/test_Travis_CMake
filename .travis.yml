@@ -15,6 +15,7 @@ jobs:
         - sourceline: 'deb https://apt.kitware.com/ubuntu/ bionic-rc main'
         packages:
         - cmake
+    install: whereis apt
 
   - name: Ubuntu 16.04 LTS - Xenial
     dist: xenial
