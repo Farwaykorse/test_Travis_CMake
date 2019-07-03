@@ -2,7 +2,8 @@ language: cpp
 
 jobs:
   include:
-  - dist: bionic
+  - name: Ubuntu 18.04 LTS - Bionic
+    dist: bionic
     addons:
       apt:
         sources:
@@ -15,7 +16,8 @@ jobs:
         packages:
         - cmake
 
-  - dist: xenial
+  - name: Ubuntu 16.04 LTS - Xenial
+    dist: xenial
     addons:
       apt:
         sources:
@@ -25,13 +27,15 @@ jobs:
         packages:
         - cmake
 
-  - dist: trusty
+  - name: Ubuntu 14.04 LTS - Trusty
+    dist: trusty
     addons:
       apt:
         packages:
         - cmake
 
-  - dist: precise
+  - name: Ubuntu 12.04 LTS - Precise
+    dist: precise
     addons:
       apt:
         packages:
