@@ -1,0 +1,59 @@
+language: cpp
+
+jobs:
+  include:
+  - dist: bionic
+    addons:
+      apt:
+        sources:
+        # Official Kitware APT repository. Currently supports Bionic and Xenial.
+        # More information at: https://apt.kitware.com
+        - sourceline: 'deb https://apt.kitware.com/ubuntu/ bionic main'
+          key_url: 'https://apt.kitware.com/keys/kitware-archive-latest.asc'
+        # Optional to get release candidates when available.
+        - sourceline: 'deb https://apt.kitware.com/ubuntu/ bionic-rc main'
+        packages:
+        - cmake
+
+  - dist: xenial
+    addons:
+      apt:
+        sources:
+        - sourceline: 'deb https://apt.kitware.com/ubuntu/ xenial main'
+          key_url: 'https://apt.kitware.com/keys/kitware-archive-latest.asc'
+        - sourceline: 'deb https://apt.kitware.com/ubuntu/ xenial-rc main'
+        packages:
+        - cmake
+
+  - dist: trusty
+    addons:
+      apt:
+        packages:
+        - cmake
+
+  - dist: precise
+    addons:
+      apt:
+        packages:
+        - cmake
+
+script:
+- lsb_release --all
+- apt-cache show cmake -a | grep Version
+- |
+  function cond_call {
+    if [[ "$(command -v $1)" ]]; then
+      echo $1
+      command -v $1
+      $@ --version
+    fi
+  }
+- cond_call cmake
+- |
+  LOCATIONS="$(whereis cmake)"
+  for LOCATION in ${LOCATIONS:-}; do
+    cond_call $LOCATION --version
+  done
+- cond_call /usr/local/cmake/bin/cmake # secondary location on Xenial
+- hash
+- echo $PATH
