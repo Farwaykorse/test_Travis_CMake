@@ -41,6 +41,9 @@ jobs:
         packages:
         - cmake
 
+  allow_failures:
+  - dist: bionic # APT script is not working on Bionic
+
 before_script:
 - |
   function cond_call {
