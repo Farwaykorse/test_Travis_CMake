@@ -61,7 +61,7 @@ script:
 - |
   LOCATIONS="$(whereis cmake)"
   for LOCATION in ${LOCATIONS:-}; do
-    cond_call $LOCATION --version
+    cond_call $LOCATION
   done
 - cond_call /usr/local/cmake/bin/cmake # secondary location on Xenial
 - hash
