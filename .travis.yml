@@ -4,23 +4,17 @@ jobs:
   include:
   - name: Ubuntu 18.04 LTS - Bionic
     dist: bionic
-    #addons:
-    #  apt:
-    #    sources:
-    #    # Official Kitware APT repository. Currently supports Bionic and Xenial.
-    #    # More information at: https://apt.kitware.com
-    #    - sourceline: 'deb https://apt.kitware.com/ubuntu/ bionic main'
-    #      key_url: 'https://apt.kitware.com/keys/kitware-archive-latest.asc'
-    #    # Optional to get release candidates when available.
-    #    - sourceline: 'deb https://apt.kitware.com/ubuntu/ bionic-rc main'
-    #    packages:
-    #    - cmake
-    install:
-    - wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | sudo apt-key add -
-    - sudo apt-add-repository 'deb https://apt.kitware.com/ubuntu/ bionic main'
-    - sudo apt-add-repository 'deb https://apt.kitware.com/ubuntu/ bionic-rc main'
-    - sudo apt update
-    - sudo apt install cmake
+    addons:
+      apt:
+        sources:
+        # Official Kitware APT repository. Currently supports Bionic and Xenial.
+        # More information at: https://apt.kitware.com
+        - sourceline: 'deb https://apt.kitware.com/ubuntu/ bionic main'
+          key_url: 'https://apt.kitware.com/keys/kitware-archive-latest.asc'
+        # Optional to get release candidates when available.
+        - sourceline: 'deb https://apt.kitware.com/ubuntu/ bionic-rc main'
+        packages:
+        - cmake
 
   - name: Ubuntu 16.04 LTS - Xenial
     dist: xenial
