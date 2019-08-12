@@ -6,8 +6,6 @@ jobs:
   - osx_image: xcode11
   - osx_image: xcode10.2
   - osx_image: xcode10.1
-    install:
-    - brew link gcc@8
   - osx_image: xcode10
   - osx_image: xcode9.4
   - osx_image: xcode9.3
@@ -18,6 +16,18 @@ jobs:
   - osx_image: xcode8
   - osx_image: xcode7.3
   - osx_image: xcode6.4
+
+install:
+- |
+  # Lock GCC version on OSX, to keep brew upgrade from changing the version
+  if [[ "${TRAVIS_OSX_IMAGE:-}" &&
+    ${TRAVIS_OSX_IMAGE} =~ ^xcode(11|10\.[12])$
+  ]]; then
+    brew unlink gcc
+    if [[ ${TRAVIS_OSX_IMAGE} == xcode10.* ]]; then brew link gcc@8
+    elif [[ ${TRAVIS_OSX_IMAGE} == "xcode11" ]]; then   brew link gcc@9
+    fi
+  fi
 
 before_script:
 - |
