@@ -27,6 +27,8 @@ before_script:
       echo "---------------------------"
     fi
   }
+
+script:
 - |
   cond_call "g++"
   cond_call "g++-9"
@@ -35,14 +37,4 @@ before_script:
   cond_call "g++-6"
   cond_call "g++-5"
   cond_call "g++-4.9"
-  cond_call "g++-4.7"
-  cond_call "g++-4.6"
-  cond_call "g++-4.5"
-  cond_call "g++-4.4"
-  cond_call "g++-4.3"
-  cond_call "g++-4.2"
-  cond_call "g++-4.1"
-
-script:
-- whereis g++
 - brew list
