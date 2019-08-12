@@ -1,45 +1,21 @@
 language: cpp
+os: osx
 
 jobs:
   include:
-  - name: Ubuntu 18.04 LTS - Bionic
-    dist: bionic
-    addons:
-      apt:
-        sources:
-        # Official Kitware APT repository. Currently supports Bionic and Xenial.
-        # More information at: https://apt.kitware.com
-        - sourceline: 'deb https://apt.kitware.com/ubuntu/ bionic main'
-          key_url: 'https://apt.kitware.com/keys/kitware-archive-latest.asc'
-        # Optional to get release candidates when available.
-        - sourceline: 'deb https://apt.kitware.com/ubuntu/ bionic-rc main'
-        packages:
-        - cmake
-
-  - name: Ubuntu 16.04 LTS - Xenial
-    dist: xenial
-    addons:
-      apt:
-        sources:
-        - sourceline: 'deb https://apt.kitware.com/ubuntu/ xenial main'
-          key_url: 'https://apt.kitware.com/keys/kitware-archive-latest.asc'
-        - sourceline: 'deb https://apt.kitware.com/ubuntu/ xenial-rc main'
-        packages:
-        - cmake
-
-  - name: Ubuntu 14.04 LTS - Trusty
-    dist: trusty
-    addons:
-      apt:
-        packages:
-        - cmake
-
-  - name: Ubuntu 12.04 LTS - Precise
-    dist: precise
-    addons:
-      apt:
-        packages:
-        - cmake
+  - osx_image: xcode11
+  - osx_image: xcode10.2
+  - osx_image: xcode10.1
+  - osx_image: xcode10
+  - osx_image: xcode9.4
+  - osx_image: xcode9.3
+  - osx_image: xcode9.2
+  - osx_image: xcode9.1
+  - osx_image: xcode9
+  - osx_image: xcode3
+  - osx_image: xcode8
+  - osx_image: xcode7.3
+  - osx_image: xcode6.4
 
 before_script:
 - |
@@ -48,19 +24,24 @@ before_script:
       echo "Command: $1"
       echo "Verbose: $(command -v $1)"
       $@ --version
-      echo "----------------"
     fi
   }
+- |
+  cond_call "g++"
+  cond_call "g++-9"
+  cond_call "g++-8"
+  cond_call "g++-7"
+  cond_call "g++-6"
+  cond_call "g++-5"
+  cond_call "g++-4.9"
+  cond_call "g++-4.7"
+  cond_call "g++-4.6"
+  cond_call "g++-4.5"
+  cond_call "g++-4.4"
+  cond_call "g++-4.3"
+  cond_call "g++-4.2"
+  cond_call "g++-4.1"
 
 script:
-- lsb_release --all
-- apt-cache show cmake -a | grep Version
-- cond_call cmake
-- |
-  LOCATIONS="$(whereis cmake)"
-  for LOCATION in ${LOCATIONS:-}; do
-    cond_call $LOCATION
-  done
-- cond_call /usr/local/cmake/bin/cmake # secondary location on Xenial
-- hash
-- echo $PATH
+- whereis g++
+- brew list
