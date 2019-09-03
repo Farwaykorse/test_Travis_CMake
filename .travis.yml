@@ -51,3 +51,4 @@ script:
   cond_call "g++-5"
   cond_call "g++-4.9"
 - brew list
+- cmake --version
