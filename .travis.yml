@@ -4,6 +4,7 @@ os: osx
 jobs:
   include:
   - osx_image: xcode11
+  - osx_image: xcode10.3
   - osx_image: xcode10.2
   - osx_image: xcode10.1
   - osx_image: xcode10
