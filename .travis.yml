@@ -24,11 +24,11 @@ install:
 - |
   # Lock GCC version on OSX, to keep brew upgrade from changing the version
   if [[ "${TRAVIS_OSX_IMAGE:-}" &&
-    ${TRAVIS_OSX_IMAGE} =~ ^xcode(11|10\.[12])$
+    ${TRAVIS_OSX_IMAGE} =~ ^xcode(11(\.[12])?|10\.[12])$
   ]]; then
     brew unlink gcc
     if [[ ${TRAVIS_OSX_IMAGE} == xcode10.* ]]; then brew link gcc@8
-    elif [[ ${TRAVIS_OSX_IMAGE} == xcode11.* ]]; then brew link gcc@9
+    elif [[ ${TRAVIS_OSX_IMAGE} == xcode11* ]]; then brew link gcc@9
     fi
   fi
 
