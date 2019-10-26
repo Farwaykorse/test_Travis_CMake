@@ -22,6 +22,8 @@ jobs:
 
 install:
 - |
+  brew list --versions
+- |
   # Lock GCC version on OSX, to keep brew upgrade from changing the version
   if [[ "${TRAVIS_OSX_IMAGE:-}" &&
     ${TRAVIS_OSX_IMAGE} =~ ^xcode(11(\.[12])?|10\.[12])$
